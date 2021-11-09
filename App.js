@@ -1,20 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import Routes from './src/components/Routes';
 
 const App = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Hello Vinny!</Text>
-    </View>
-  );
+  return <Routes/>
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;

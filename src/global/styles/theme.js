@@ -21,10 +21,12 @@ const fonts = {
 }
 
 const fontSizes = {
-
+  sm: 10,
+  md: 20,
+  lg: 30,
 }
 
-export const styles = {
+export const theme = {
   fonts,
   fontSizes,
   colors,

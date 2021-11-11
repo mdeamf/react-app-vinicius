@@ -1,56 +1,72 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { TextInput, Checkbox, Button  } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
+import BtnCheckbox from '../../components/BtnCheckbox';
 import { Formik } from 'formik';
 
-import { Login, LoginCard, LoginTitle, LoginContent, LoginPage, InputContainer } from './LoginScreen.styles';
+import { 
+  LoginButton, 
+  ButtonPass, 
+  LoginCard, 
+  LoginTitle, 
+  FormikContainer, 
+  LoginPage, 
+  LoginInput, 
+  InputContainer, 
+  LoginScroll, 
+  LoginContent, 
+  LoginText } from './LoginScreen.styles';
 
 const LoginScreen = props => {
+
+  function onSubmit(values, actions) {
+    console.log(values)
+
+  };
+
   return (
     <LoginPage>
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => { console.log(values) }}
-      >
-        {(props) => (
-
-          <Login>
-            <LoginCard elevation={5}>
-              <LoginContent>
-                <LoginTitle title='Login' />
-                <InputContainer>
-                  <TextInput
-                    label='Email'
-                    placeholder='Digite seu email'
-                    value={props.values.email}
-                    onChangeText={props.handleChange('email')}
-                    left={<TextInput.Icon name='email-outline' />}
-                  />
-                  <TextInput
-                    label='Senha'
-                    value={props.values.senha}
-                    onChangeText={props.handleChange('senha')}
-                    placeholder='Digite sua senha'
-                    left={<TextInput.Icon name='lock-outline' />}
-                  />
-                </InputContainer>
-                <View style= {{ flexDirection: "row", marginBottom: 10}}>
-                  <Checkbox style={{alignSelf: "center"}}/>
-                  <Text style={{margin: 8}}>Salvar Senha?</Text>
-                </View>
-                <Button mode='contained' style={{backgroundColor: 'green'}}>Login</Button>
-                <Text>Ou entrar com:</Text>
-                <View style= {{ flexDirection: "row", marginBottom: 10}} >
-                  <Button mode='outlined'>Facebook</Button>
-                  <Button mode='outlined'>Google</Button>
-                </View>
-                <Text>Não é um mebro ainda? Faça um cadastro.</Text>
-              </LoginContent>
-            </LoginCard>
-          </Login>
-
-        )}
-      </Formik>
+      <LoginScroll>
+        <LoginCard elevation={5}>
+          <LoginTitle title='Login' />
+          <LoginContent>
+            <Formik
+              initialValues={{ email: '', senha: '', remember: false }}
+              onSubmit={onSubmit}
+            >
+              {(props) => (
+                <FormikContainer>
+                  <InputContainer>
+                    <LoginInput
+                      label='Email'
+                      placeholder='Digite seu email'
+                      value={props.values.email}
+                      onChangeText={props.handleChange('email')}
+                      onBlur={props.handleBlur('email')}
+                      left={<TextInput.Icon name='email-outline' />}
+                      keyboardType='email-address'
+                    />
+                    <LoginInput
+                      label='Senha'
+                      value={props.values.senha}
+                      onChangeText={props.handleChange('senha')}
+                      onBlur={props.handleBlur('senha')}
+                      placeholder='Digite sua senha'
+                      left={<TextInput.Icon name='lock-outline' />}
+                      keyboardType='numeric'
+                    />
+                    <BtnCheckbox text='Lembrar minha senha' status='checked' />
+                  </InputContainer>
+                  <LoginButton mode='contained' onPress={props.handleSubmit}>Login</LoginButton>
+                  <ButtonPass onPress={() => {}}>Esqueci minha senha</ButtonPass>
+                  <LoginText>Não é um membro ainda?
+                    <LoginText style={{ color: '#754F96' }}> Faça o cadastro.</LoginText>
+                  </LoginText>
+                </FormikContainer>
+              )}
+            </Formik>
+          </LoginContent>
+        </LoginCard>
+      </LoginScroll>
     </LoginPage>
   );
 }

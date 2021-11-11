@@ -14,9 +14,9 @@ const Stack = createNativeStackNavigator();
 const Routes = props => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}/>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={LoginScreen}/>
+        <Stack.Screen name="Home" component={HomeScreen}/>        
         <Stack.Screen name="Cotitulares" component={CotitularesScreen}/>
         <Stack.Screen name="Cadastrar" component={CadastrarScreen}/>
         <Stack.Screen name="Perfil" component={PerfilScreen}/>

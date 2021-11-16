@@ -1,17 +1,19 @@
 import styled from 'styled-components/native';
 import {theme} from '../../global/styles/theme';
 import {View, Text} from 'react-native';
-import { Card, TextInput, Button } from 'react-native-paper';
+import { Card, TextInput, Button, Modal } from 'react-native-paper';
+import BtnCheckbox from '../../components/BtnCheckbox';
 import LinearGradient from 'react-native-linear-gradient'
+import FormModal from '../../components/Modals/FormModal';
 
 
 export const LoginScroll = styled(View).attrs({
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center'
-})`
+})``;
 
-`;
+export const LoginCheckBox = styled(BtnCheckbox)``;
 
 export const LoginPage = styled(LinearGradient).attrs({
   colors: [theme.colors.ui.primary, theme.colors.ui.secondary],
@@ -39,9 +41,7 @@ export const LoginTitle= styled(Card.Title).attrs({
 
 export const InputContainer = styled(View)`
   height: 200px; 
-  justify-content: space-between;
-
-
+  justify-content: space-around;
 `;
 
 export const LoginInput = styled(TextInput)`
@@ -87,6 +87,13 @@ export const ButtonPass = styled(Button).attrs({
 })`
 
 `;
+
+export const ModalPassword = styled(FormModal).attrs({
+  contentContainerStyle: {
+    width: '90%',
+  }
+})``;
+
 
 export const LoginCard = styled(Card)`
   width: 350px;

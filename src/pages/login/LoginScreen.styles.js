@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {theme} from '../../global/styles/theme';
-import {View, Text} from 'react-native';
-import { Card, TextInput, Button, Modal } from 'react-native-paper';
+import {View, Text, Image} from 'react-native';
+import { Card, TextInput, Button, HelperText } from 'react-native-paper';
 import BtnCheckbox from '../../components/BtnCheckbox';
 import LinearGradient from 'react-native-linear-gradient'
 import FormModal from '../../components/Modals/FormModal';
@@ -35,7 +35,6 @@ export const LoginTitle= styled(Card.Title).attrs({
     textAlign: 'center'
   }
 })` 
-  margin-top: 50px;
   padding: 10px;
 `;
 
@@ -62,12 +61,12 @@ export const LoginButton = styled(Button).attrs({
     fontSize: theme.fontSizes.md,
     fontFamily: theme.fonts.ss,
     fontWeight: 'bold'
-  }
+  },
+  color: theme.colors.ui.primary
 })`
   margin-top: 20px;
   justify-content: center;
   height: 60px;
-  background-color: ${theme.colors.ui.primary}; 
 `;
 
 export const LoginText = styled(Text)`
@@ -88,11 +87,24 @@ export const ButtonPass = styled(Button).attrs({
 
 `;
 
+export const ContainerTitle = styled(View)`
+  align-items: center;
+`;
+
+export const LoginLogo = styled(Image)`
+  width: 70px;
+  height: 70px;
+`;
+
 export const ModalPassword = styled(FormModal).attrs({
   contentContainerStyle: {
     width: '90%',
   }
 })``;
+
+export const LoginError = styled(HelperText)`
+ 
+`;
 
 
 export const LoginCard = styled(Card)`

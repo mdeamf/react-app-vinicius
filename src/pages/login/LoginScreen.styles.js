@@ -106,7 +106,6 @@ export const LoginError = styled(HelperText)`
  
 `;
 
-
 export const LoginCard = styled(Card)`
   width: 350px;
   height: 650px; 

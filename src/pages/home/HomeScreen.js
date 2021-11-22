@@ -12,6 +12,8 @@ const  HomeScreen = props => {
   const Loading = (ligaDesl) => dispatch({type: LOADING, isLoading: ligaDesl});
   const state = useSelector((state) => state.login);
   console.log(state)
+
+  //Para ir para a tela de Login o app desloga o usuário
   const ToLogin = () => {
     Loading(true);
 
@@ -25,8 +27,6 @@ const  HomeScreen = props => {
       
     }, 3000);    
   };
-
-
 
   return (
     <View style={styles.home }>

@@ -29,6 +29,8 @@ const LoginScreen = () => {
   const [userRemember, setUserRemember] = React.useState(false);
   const [disableButton, setDisableButton] = React.useState(true);
   const [visible, setVisible] = React.useState(false);
+  const [passSecurity, setPassSecurity] = React.useState(false);
+  const [passIcon, setPassIcon] = React.useState('eye-off')
 
   const state = useSelector((state) => state.login);
   const dispatch = useDispatch();
@@ -37,6 +39,11 @@ const LoginScreen = () => {
   const hideModal = () => setVisible(false);
 
   const Loading = (ligaDesl) => dispatch({ type: LOADING, isLoading: ligaDesl });
+
+  const ChangeIcon = () => {
+    setPassSecurity(!passSecurity);
+    setPassIcon(passIcon == 'eye' ? 'eye-off' : 'eye');
+  };
 
   const onSendEmail = (email) => {
     dispatch({
@@ -175,7 +182,8 @@ const LoginScreen = () => {
                     placeholder='Digite sua senha'
                     left={<TextInput.Icon name='lock-outline' />}
                     keyboardType='numeric'
-                    secureTextEntry={true}
+                    secureTextEntry={passSecurity}
+                    right={<TextInput.Icon name={passIcon} onPress={ChangeIcon}/>}
                   />
                   {loginFormik.errors.password && <LoginError type='error'>{loginFormik.errors.password}</LoginError>}
 

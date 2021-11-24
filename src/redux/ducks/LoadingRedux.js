@@ -1,5 +1,10 @@
-import { LOADING } from '../actions/LoadingAction';
 
+// Action Types
+export const Types = {
+  LOADING: 'LOADING',
+};
+
+// Reducer
 const initialState = {
   isLoading: false,
 };
@@ -8,7 +13,7 @@ export default (state = initialState, action) => {
   let isLoading = state.isLoading;
 
   switch (action.type) {
-    case LOADING:
+    case Types.LOADING:
       isLoading = action.isLoading;
       break;
   }

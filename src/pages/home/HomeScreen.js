@@ -2,14 +2,14 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOADING } from '../../redux/actions/LoadingAction';
-import { DO_LOGIN } from '../../redux/actions/LoginActions';
+import { Types } from '../../redux/ducks/LoginRedux';
+import { Types as loading } from '../../redux/ducks/LoadingRedux';
 import {theme} from '../../global/styles/theme';
 
 const  HomeScreen = props => {
 
   const dispatch = useDispatch();
-  const Loading = (ligaDesl) => dispatch({type: LOADING, isLoading: ligaDesl});
+  const Loading = (ligaDesl) => dispatch({type: loading.LOADING, isLoading: ligaDesl});
   const state = useSelector((state) => state.login);
   console.log(state)
 
@@ -19,8 +19,7 @@ const  HomeScreen = props => {
 
     setTimeout(() => {
       dispatch({
-        type: DO_LOGIN,
-        isLoggedIn: false,
+        type: Types.LOGOUT,
         user: ''
       });
       Loading(false);

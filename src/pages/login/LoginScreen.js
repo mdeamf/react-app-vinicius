@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextInput, Provider, Snackbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { DO_LOGIN, SEND_EMAIL } from '../../redux/actions/LoginActions';
-import { LOADING } from '../../redux/actions/LoadingAction';
+import { Types } from '../../redux/ducks/LoginRedux';
+import { Types as loading } from '../../redux/ducks/LoadingRedux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -37,9 +37,7 @@ const LoginScreen = () => {
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-
-  const Loading = (ligaDesl) => dispatch({ type: LOADING, isLoading: ligaDesl });
-
+  const Loading = (ligaDesl) => dispatch({type: loading.LOADING, isLoading: ligaDesl});
   const ChangeIcon = () => {
     setPassSecurity(!passSecurity);
     setPassIcon(passIcon == 'eye' ? 'eye-off' : 'eye');
@@ -47,7 +45,7 @@ const LoginScreen = () => {
 
   const onSendEmail = (email) => {
     dispatch({
-      type: SEND_EMAIL,
+      type: Types.SEND_EMAIL,
       isSendEmail: true,
       email: email
     })
@@ -55,23 +53,22 @@ const LoginScreen = () => {
 
   const onDismissSendEmail = () => {
     dispatch({
-      type: SEND_EMAIL,
+      type: Types.SEND_EMAIL,
       isSendEmail: false,
       email: ''
     })
   };
   // Grava o Login no Redux
-  const doLogin = (user) => {
+  const doLogin = (user, password) => {
     Loading(true);
     setTimeout(() => {
       dispatch({
-        type: DO_LOGIN,
-        isLoggedIn: true,
-        user: user
-      });
-      Loading(false);
-
-    }, 3000);
+        type: Types.LOGIN,
+        user: user,
+        password: password
+      }); 
+      Loading(false);    
+    }, 3000);   
   };
 
   //validação dos campos do Login
@@ -99,7 +96,7 @@ const LoginScreen = () => {
       userRemember: false,
     },
     onSubmit: values => {
-      doLogin(values.user);
+      doLogin(values.user, values.password);
     },
     validationSchema: loginValidate
   });
@@ -183,7 +180,7 @@ const LoginScreen = () => {
                     left={<TextInput.Icon name='lock-outline' />}
                     keyboardType='numeric'
                     secureTextEntry={passSecurity}
-                    right={<TextInput.Icon name={passIcon} onPress={ChangeIcon}/>}
+                    right={<TextInput.Icon name={passIcon} onPress={ChangeIcon} />}
                   />
                   {loginFormik.errors.password && <LoginError type='error'>{loginFormik.errors.password}</LoginError>}
 
